@@ -1,0 +1,41 @@
+---
+# Installs the Python-Setup Tools
+- name: install python-setuptools
+  apt: name=python-setuptools
+ 
+# Runs the apt-get update  
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: yes
+     
+# Downloads the Python-MySQLdb for Ubuntu
+- name: Download my_package python-mysqldb
+  get_url: 
+    url="{{ mysql-python-package }}" 
+   dest="{{ python-mysqldb }}"
+
+# Installs the deb file from the destination
+- name: install deb file
+  apt: deb="{{ python-mysqldb }}"
+  
+# Downloads the Mariadb-Client from the mirrors  
+- name: Download mariadb-client
+  get_url: 
+    url="{{ mariadb-client-package }}"
+    dest="{{ mariadb-client }}"  
+
+# Downloads the Mariadb-Server from the mirrors  
+- name: Download mariadb-server
+  get_url: 
+    url="{{ mariadb-server-package }}"
+    dest="{{ mariadb-server }}"
+    
+# Installs the deb file from the destination
+- name: install deb file
+  apt: deb="{{ mariadb-client }}"  
+
+# Installs the deb file from the destination  
+- name: install deb file
+  apt: deb="{{ mariadb-server }}"
+  
+
